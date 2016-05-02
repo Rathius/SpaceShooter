@@ -11,6 +11,12 @@ SpaceShooter.Enemy = function(game, x, y, key, health, enemyBullets) {
     this.health = health;
 
     this.enemyBullets = enemyBullets;
+
+    this.enemyTimer = this.game.time.create(false);
+    this.enemyTimer.start();
+
+    this.scheduleShooting();
+
 };
 
 SpaceShooter.Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -50,3 +56,21 @@ SpaceShooter.Enemy.prototype.damage = function(amount) {
 };
 
 
+SpaceShooter.Enemy.prototype.scheduleShooting = function() {
+    this.shoot();
+
+    this.enemyTimer.add(Phaser.Timer.SECOND * 2, this.scheduleShooting, this);
+};
+
+SpaceShooter.Enemy.prototype.shoot = function() {
+    var bullet = this.enemyBullets.getFirstExists(false);
+
+    if(!bullet) {
+        bullet = new SpaceShooter.EnemyBullet(this.game, this.x, this.bottom);
+        this.enemyBullets.add(bullet);
+    } else {
+        bullet.reset(this.x, this.y);
+    }
+
+    bullet.body.velocity.y = 100;
+};
