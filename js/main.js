@@ -1,7 +1,7 @@
-var SpaceHipster = SpaceHipster || {};
+var SpaceShooter = SpaceShooter || {};
 
 //initiate the Phaser framework
-SpaceHipster.game = new Phaser.Game('100%', '100%', Phaser.AUTO);
+SpaceShooter.game = new Phaser.Game('100%', '100%', Phaser.AUTO);
 
-SpaceHipster.game.state.add('GameState', SpaceHipster.GameState);
-SpaceHipster.game.state.start('GameState');
+SpaceShooter.game.state.add('GameState', SpaceShooter.GameState);
+SpaceShooter.game.state.start('GameState');
