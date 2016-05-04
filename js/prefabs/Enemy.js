@@ -33,7 +33,7 @@ SpaceShooter.Enemy.prototype.update = function() {
 
     // kill enemy if off world at bottom
     if(this.position.y > this.game.world.height) {
-        this,kill();
+        this.kill();
     }
 };
 
