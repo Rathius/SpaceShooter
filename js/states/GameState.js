@@ -28,6 +28,11 @@ SpaceShooter.GameState = {
         this.load.spritesheet('redEnemy', 'assets/images/red_enemy.png', 50, 46, 3, 1, 1);
         this.load.spritesheet('greenEnemy', 'assets/images/green_enemy.png', 50, 46, 3, 1, 1);
 
+        // load level data
+        this.load.text('level1', 'assets/data/level1.json');
+        this.load.text('level2', 'assets/data/level2.json');
+        this.load.text('level3', 'assets/data/level3.json');
+
 
     },
     //executed after everything is loaded
@@ -117,46 +122,7 @@ SpaceShooter.GameState = {
 
         this.currentEnemyIndex = 0;
 
-        this.levelData = {
-            "duration": 5,
-            "enemies": [
-            {
-                "time": 1,
-                "x": 0.05,
-                "health": 6,
-                "speedX": 20,
-                "speedY": 50,
-                "key": "greenEnemy",
-                "scale": 3
-            },
-            {
-                "time": 2,
-                "x": 0.1,
-                "health": 3,
-                "speedX": 50,
-                "speedY": 50,
-                "key": "redEnemy",
-                "scale": 1
-            },
-            {
-                "time": 3,
-                "x": 0.1,
-                "health": 3,
-                "speedX": 50,
-                "speedY": 50,
-                "key": "yellowEnemy",
-                "scale": 1
-            },
-            {
-                "time": 4,
-                "x": 0.1,
-                "health": 3,
-                "speedX": 50,
-                "speedY": 50,
-                "key": "greenEnemy",
-                "scale": 1
-            }]
-        };
+        this.levelData = JSON.parse(this.game.cache.getText('level' + this.currentLevel));
 
         // end of level timer
         this.endOfLevelTimer = this.game.time.events.add(this.levelData.duration * 1000, function(){
